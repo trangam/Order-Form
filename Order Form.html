@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Week 6 Lab - JavaScript DOM and Arrays</title>
+        <meta charset="utf-8">
+		<link rel="stylesheet" href="mycss/style.css">
+<script>
+		function Validate(){
+		var arraysOfInputTags=document.getElementsByTagName("input");
+		var province = document.getElementById("province");
+		var shipPrices = new Array();
+          shipPrices["Standard"]=5;
+          shipPrices["Express"]=10;
+          shipPrices["Overnight"]=20;
+
+	
+      
+	  for(var i=0;i<=4; i++){
+	   
+	    if (arraysOfInputTags[i].value.length==0){	
+	    alert("Please enter " + arraysOfInputTags[i].name);
+        return false;
+          }	 
+      }
+       if(province.value == "Select a province")  
+            {  
+               alert("Select your province from the list");  
+                province.focus();  
+                return false;   
+            }
+  
+       if (arraysOfInputTags[4].value.length!=6){
+       alert("The postalCode field must be 6 digits long"); 
+       return false;
+       } 
+       
+	for(t=5;t<=7;t++){
+	
+	  if(isNaN(arraysOfInputTags[t].value)){
+	   alert("Please enter a number for " + arraysOfInputTags[t].name);
+      return false;
+      } 
+  
+     if (arraysOfInputTags[t].value<0){
+     alert("Please enter a valid number for " +arraysOfInputTags[t].name);
+    return false;
+     }
+ 
+    if(arraysOfInputTags[t].value==0 && arraysOfInputTags[t+1].value==0){
+    alert("At least two items must be ordered");
+    return false;
+     }
+  }
+  
+  var price=arraysOfInputTags[5].value*5 +arraysOfInputTags[6].value*15+arraysOfInputTags[7].value*25;
+  
+  for(a=8;a<=10;a++){
+  
+     if(arraysOfInputTags[a].checked){
+    var total= price + shipPrices[arraysOfInputTags[a].value];
+    alert( "Form validated successfully\n" + "The total price is " +total);
+      }
+   }
+ 
+
+}
+		</script>
+    </head>
+    <body>
+	<div id="wrapper">
+        <h2>Order Form</h2>
+        <form onsubmit="return Validate()"  name="orderForm" method="post" action="processForm.html" >
+       <fieldset>
+	   
+            
+               <legend> Personal Information </legend>
+            
+			<table>
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" name="firstName" id="firstName" size="30"></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" name="lastName" id="lastName" size="30"></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" name="address" id="address" size="30"></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><input type="text" name="city" id="city" size="30"></td>
+            </tr>
+            <tr>
+                <td>Province:</td>
+                <td><select name="province" id="province" size="1">
+                        <option disabled>Select a province</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="AB">Alberta</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="ON">Ontario</option>
+                        <option value="QC">Québec</option>
+                        <option value="NB">New Brunswick</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="PE">Prince Edward Island</option>
+                        <option value="NF">Newfoundland</option>
+                        <option value="YK">Yukon</option>
+                        <option value="NWT">Northwest Territories</option>
+                        <option value="NU">Nunavut</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Postal Code:</td>
+                <td><input type="text" name="postalCode" id="postalCode" maxlength="6"></td>
+			
+            </tr>
+			</table>
+			</fieldset>
+			<fieldset>
+			
+               <legend> Order Information</legend>
+            
+			<table>
+            <tr>
+                <td rowspan="3">Select your products:<br>
+                  <span id="productError" class="errorMessage" hidden></span></td> 
+                <td>Widget #1&nbsp;
+                    <input type="text" name="widget1qty" id="widget1qty" size="1" value="0">Qty @ <strong>$5.00/ea</strong></td>
+            </tr>
+            <tr>
+                <td>Widget #2&nbsp;
+                    <input type="text" name="widget2qty" id="widget2qty" size="1" value="0">Qty @ <strong>$15.00/ea</strong></td>
+            </tr>
+            <tr>
+                <td>Widget #3&nbsp;
+                    <input type="text" name="widget3qty" id="widget3qty" size="1" value="0">Qty @ <strong>$25.00/ea</strong></td>
+            </tr>
+			
+			
+            <tr>
+                <td rowspan="3">Shipping Type:</td>
+                <td>Standard ($5.00)<input type="radio" name="shippingType" id="shippingTypeStandard" value="Standard" checked></td>
+
+            </tr>
+            <tr>
+                <td>Express ($10.00)<input type="radio" name="shippingType" id="shippingTypeExpress" value="Express"></td>
+            </tr>
+            <tr>
+                <td>Overnight ($20.00)<input type="radio" name="shippingType" id="shippingTypeOvernight" value="Overnight"></td>
+            </tr>
+			</table>
+			</fieldset>
+			<fieldset>
+			   
+               <legend> Submit Order </legend>
+           
+			<table>
+            <tr>
+                <td><input type="submit" name="btnSubmit" id="btnSubmit" value="Submit Order" ></td>
+                <td><input type="reset" name="btnReset" id="btnReset" value="Reset Form"></td>
+            </tr>
+        </table>
+		</fieldset>
+        </form>
+		</div><!-- End Wrapper -->
+		<p>
+			<a href="https://validator.w3.org/check?uri=referer"><img
+			src="http://www.w3.org/Icons/valid-xhtml10"
+			alt="Valid XHTML 1.0!" height="31" width="88" /></a>
+		</p>
+    </body>
+</html>
